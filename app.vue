@@ -12,3 +12,18 @@
     </NuxtErrorBoundary>
   </div>
 </template>
+
+<style lang="postcss">
+::-webkit-scrollbar {
+  @apply w-2;
+}
+::-webkit-scrollbar-track {
+  @apply bg-gray-500;
+}
+::-webkit-scrollbar-thumb {
+  @apply bg-gray-200 rounded;
+}
+::-webkit-scrollbar-thumb:hover {
+  @apply bg-gray-300;
+}
+</style>
