@@ -9,13 +9,13 @@
   },
   "devDependencies": {
     "@tailwindcss/typography": "^0.5.9",
+    "daisyui": "^3.1.7",
     "nuxt": "^3.3.0",
     "rollup": "3.18.0"
   },
   "dependencies": {
     "@nuxtjs/tailwindcss": "^6.6.4",
     "@vueuse/nuxt": "^9.13.0",
-    "daisyui": "^2.51.5",
     "html-to-image": "^1.11.11",
     "nanoid": "^4.0.1",
     "openai": "^3.2.1",
