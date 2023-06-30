@@ -1,4 +1,5 @@
 import { ChatCompletionRequestMessage } from "openai"
+import trainingData from "../data/trainingMessages.json"
 
 const storage = useStorage() // Nitro storage
 
@@ -8,23 +9,10 @@ export default defineEventHandler(async (event) => {
   })
   const storageKey = session.id + ":messages"
 
-  const trainingMessages: ChatCompletionRequestMessage[] = [
-    {
-      role: "system",
-      content:
-        "You are a helpful customer support assistant for the 'Social Media Post Generator' application. \n" + 
-        "This software takes an article URL and makes an announcement post for social media. \n" +
-        "Do NOT answer questions that are not related to the application." 
-    },
-    {
-      role: "user",
-      content:
-        "You are a helpful customer support assistant for the 'Social Media Post Generator' application. \n" + 
-        "This software takes an article URL and makes an announcement post for social media. \n" +
-        "Do NOT answer questions that are not related to the application." 
-    }
-  ]
-  const { message } = await readBody(event)
+  const trainingMessages =
+    trainingData.messages as Array<ChatCompletionRequestMessage>
+
+  const { message, temperature = 1 } = await readBody(event)
   const messages: ChatCompletionRequestMessage[] =
     (await storage.getItem(storageKey)) || []
 
@@ -35,7 +23,8 @@ export default defineEventHandler(async (event) => {
 
   const completion = await openai.createChatCompletion({
     model: "gpt-3.5-turbo",
-    messages: [...trainingMessages, ...messages]
+    messages: [...trainingMessages, ...messages],
+    temperature
   })
 
   const response = completion.data.choices[0].message

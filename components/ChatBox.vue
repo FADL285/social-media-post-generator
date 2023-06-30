@@ -92,6 +92,7 @@ const textMessage = ref("")
             <li>What is social media post generator?</li>
             <li>How can I get human support?</li>
             <li>How was this tool built?</li>
+            <li>How build this Application?</li>
           </ul>
         </div>
         <div>
