@@ -32,3 +32,13 @@ const relativeTime = useTimeAgo(() => props.message?.createdAt ?? new Date())
     </div>
   </div>
 </template>
+
+<style lang="postcss" scoped>
+:deep(code) {
+  background: none;
+  @apply overflow-x-auto w-full;
+}
+:deep(pre) {
+  @apply dark:bg-[rgba(0,0,0,.3)] overflow-x-auto w-full;
+}
+</style>

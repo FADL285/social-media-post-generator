@@ -44,7 +44,7 @@ const textMessage = ref("")
 </script>
 
 <template>
-  <div class="fixed bottom-[10px] right-[10px]">
+  <div class="mx-c-full fixed bottom-[10px] right-[10px]">
     <button
       class="bg-blue-500 p-3 rounded"
       v-show="!isOpen"
@@ -81,6 +81,19 @@ const textMessage = ref("")
       <div
         class="messages p-4 overflow-y-auto max-h-[80vh] flex flex-col-reverse"
       >
+        <div
+          v-if="!messages.length"
+          class="text-center max-w-full w-[350px] m-auto"
+        >
+          <strong class="text-lg">Chat with Botman!</strong>
+          <p>Our A.I. powered assistant</p>
+          <strong class="block mt-10">Go ahead and ask us something:</strong>
+          <ul class="list-inside list-disc text-left">
+            <li>What is social media post generator?</li>
+            <li>How can I get human support?</li>
+            <li>How was this tool built?</li>
+          </ul>
+        </div>
         <div>
           <ChatBubble
             v-for="message in messages"
@@ -109,3 +122,9 @@ const textMessage = ref("")
     </div>
   </div>
 </template>
+
+<style scoped>
+.mx-c-full {
+  max-width: calc(100% - 10px);
+}
+</style>

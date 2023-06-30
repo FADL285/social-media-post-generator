@@ -19,7 +19,7 @@
     "@vueuse/nuxt": "^9.13.0",
     "html-to-image": "^1.11.11",
     "nanoid": "^4.0.1",
-    "openai": "^3.2.1",
+    "openai": "^3.3.0",
     "vue3-markdown-it": "^1.0.10"
   }
 }
