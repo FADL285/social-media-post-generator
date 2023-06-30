@@ -1,4 +1,6 @@
-# Nuxt 3 Minimal Starter
+# Social Media Post Generator App powered by chatGPT
+
+AI App powered by OpenAI ChatGPT, This app takes an article URL and makes an announcement post for social media.
 
 Look at the [Nuxt 3 documentation](https://nuxt.com/docs/getting-started/introduction) to learn more.
 
