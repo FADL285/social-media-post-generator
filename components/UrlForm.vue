@@ -1,14 +1,14 @@
 <script setup lang="ts">
 import type { URLFormPayload } from "~~/types"
 
-const form: URLFormPayload = reactive({
-  url: "",
-  temperature: 1
+const formURLModel = defineModel<string>("url", { required: true })
+const formTemperatureModel = defineModel<number>("temperature", {
+  default: 0.5
 })
 
 const validUrl = computed(() => {
   try {
-    new URL(form.url)
+    new URL(formURLModel.value)
     return true
   } catch {
     return false
@@ -20,7 +20,11 @@ const emit = defineEmits<{
 }>()
 
 const handleSubmit = () => {
-  if (validUrl.value) emit("submit", form)
+  if (validUrl.value)
+    emit("submit", {
+      url: formURLModel.value,
+      temperature: formTemperatureModel.value
+    })
 }
 </script>
 
@@ -31,14 +35,14 @@ const handleSubmit = () => {
         <input
           type="url"
           placeholder="Full Article URL..."
-          v-model="form.url"
+          v-model="formURLModel"
           class="input input-bordered sm:flex-1"
           required
         />
         <button class="btn uppercase hover">Generate Announcements</button>
       </div>
     </div>
-    <TemperatureSelector v-model="form.temperature" />
+    <TemperatureSelector v-model="formTemperatureModel" />
   </form>
 </template>
 

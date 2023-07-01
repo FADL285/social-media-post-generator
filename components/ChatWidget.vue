@@ -14,37 +14,29 @@ const bot = ref<User>({
 })
 
 const users = computed(() => [me.value, bot.value])
-
 const messages = useSessionStorage<Message[]>("messages", [])
-
 const usersTyping = ref<User[]>([])
 
-// send messages to Chat API here
-// and in the empty function below
-
+const { chat, firstMessage, state } = useChatAi({ agent: "customerSupport" })
 async function handleNewMessage(message: Message) {
   messages.value.push(message)
   usersTyping.value.push(bot.value)
 
-  const { data: reply } = await useFetch("/api/ai", {
-    method: "POST",
-    body: {
-      message: message.text
-    }
-  })
-
-  console.log(reply)
+  await chat({ message: message.text })
 
   usersTyping.value.pop()
   messages.value.push({
     id: nanoid(),
     createdAt: new Date(),
     text:
-      reply.value?.content ?? "Sorry, the service is unavailable right now.",
+      state.value === "error"
+        ? "Sorry, the service is unavailable right now."
+        : (firstMessage.value?.content as string),
     userId: bot.value.id
   })
 }
 </script>
+
 <template>
   <ChatBox
     :me="me"

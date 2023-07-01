@@ -1,5 +1,5 @@
 import { ChatCompletionRequestMessage } from "openai"
-import trainingData from "../data/trainingMessages.json"
+import * as agents from "@/agents"
 
 const storage = useStorage() // Nitro storage
 
@@ -9,10 +9,23 @@ export default defineEventHandler(async (event) => {
   })
   const storageKey = session.id + ":messages"
 
-  const trainingMessages =
-    trainingData.messages as Array<ChatCompletionRequestMessage>
+  const { message, agent, url, temperature = 0.2 } = await readBody(event)
 
-  const { message, temperature = 1 } = await readBody(event)
+  if (!Object.keys(agents).includes(`${agent}Agent`))
+    throw new Error(`${agent} Agent does not exist`)
+
+  if (agent !== agents.AgentTypes.CustomerSupport) {
+    const { data } = await openai.createChatCompletion({
+      model: "gpt-3.5-turbo",
+      messages: [],
+      temperature,
+      // @ts-expect-error checking above if agent exists
+      ...agents[`${agent}Agent`]({ url })
+    })
+
+    return data
+  }
+
   const messages: ChatCompletionRequestMessage[] =
     (await storage.getItem(storageKey)) || []
 
@@ -21,19 +34,19 @@ export default defineEventHandler(async (event) => {
     content: message
   })
 
-  const completion = await openai.createChatCompletion({
+  const { data } = await openai.createChatCompletion({
     model: "gpt-3.5-turbo",
-    messages: [...trainingMessages, ...messages],
-    temperature
+    messages: [],
+    temperature,
+    ...agents.customerSupportAgent({ messages })
   })
-
-  const response = completion.data.choices[0].message
+  const reply = data.choices[0].message
   messages.push({
     role: "assistant",
-    content: response?.content as string
+    content: reply?.content as string
   })
 
   await storage.setItem(storageKey, messages)
 
-  return response
+  return data
 })

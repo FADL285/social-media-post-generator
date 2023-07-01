@@ -15,7 +15,7 @@ const modelValue = defineModel<number>({ required: true })
     />
     <p id="hint">
       Temperature: {{ modelValue }}
-      <span class="font-bold" v-if="modelValue >= 0.5">
+      <span class="font-bold" v-if="modelValue > 0.5">
         - More random, creative, and risky</span
       >
       <span class="font-bold" v-else>
