@@ -1,6 +1,6 @@
 <script lang="ts" setup>
 import { nanoid } from "nanoid"
-import { Message, User } from "~~/types"
+import type { Message, User } from "~~/types"
 
 const props = defineProps<{
   messages: Message[]
@@ -92,7 +92,7 @@ const textMessage = ref("")
             <li>What is social media post generator?</li>
             <li>How can I get human support?</li>
             <li>How was this tool built?</li>
-            <li>How build this Application?</li>
+            <li>Who built this application?</li>
           </ul>
         </div>
         <div>

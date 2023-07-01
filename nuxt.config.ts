@@ -2,15 +2,24 @@
 export default defineNuxtConfig({
   modules: ["@nuxtjs/tailwindcss", "@vueuse/nuxt"],
 
+  vite: {
+    vue: {
+      script: {
+        defineModel: true,
+        propsDestructure: true
+      }
+    }
+  },
+
   runtimeConfig: {
     openai: {
-      apiKey: ''
+      apiKey: ""
     }
   },
 
   ssr: false,
 
   devtools: {
-    enabled: true,
-  },
-});
+    enabled: true
+  }
+})

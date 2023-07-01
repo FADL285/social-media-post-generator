@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import { User, Message } from "~~/types"
+import type { User, Message } from "~~/types"
 // @ts-expect-error: no types
 import Markdown from "vue3-markdown-it"
 

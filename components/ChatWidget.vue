@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { nanoid } from "nanoid"
-import { Message, User } from "~~/types"
+import type { Message, User } from "~~/types"
 
 const me = ref<User>({
   id: "user",

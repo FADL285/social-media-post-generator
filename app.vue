@@ -1,5 +1,5 @@
 <template>
-  <div class="max-w-full w-[900px] m-auto">
+  <div class="container px-4 md:px-6 m-auto max-w-5xl">
     <NuxtErrorBoundary>
       <SocialMediaPostGenerator />
       <ChatWidget />
