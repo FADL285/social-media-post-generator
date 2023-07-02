@@ -27,7 +27,7 @@ const isError = computed(() => props.state === "error");
 const isLoading = computed(() => props.state === "loading");
 </script>
 <template>
-  <div class="card bg-base-100 shadow-xl border-t-4 border-primary">
+  <div class="card bg-base-100 shadow-xl border-t-4 border-info">
     <div class="card-body">
       <h2 class="card-title">
         <slot name="title">{{ title }}</slot>

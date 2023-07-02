@@ -26,9 +26,9 @@ const handleURLFromSubmit = (FormData: URLFormPayload) => {
     @submit="handleURLFromSubmit"
   />
 
-  <div class="mt-8">
+  <div class="space-y-8 mt-10">
     <CardTwitter ref="twitterCard" v-bind="form" />
     <CardFacebook ref="facebookCard" v-bind="form" />
-    <!-- Images Card Here -->
+    <CardImages :url="form.url" />
   </div>
 </template>
