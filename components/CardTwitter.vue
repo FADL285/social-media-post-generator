@@ -1,5 +1,5 @@
 <script setup lang="ts">
-const { url, temperature = 0.5 } = defineProps<{
+const { url, temperature = 1 } = defineProps<{
   url: string
   temperature: number
 }>()
@@ -20,19 +20,18 @@ const postURL = computed(
     :state="state"
     :body="firstMessage?.content?.trim()"
     @update:body="firstMessage ? (firstMessage.content = $event) : null"
-    class="mb-10"
   >
     <div
       v-if="firstMessage?.content?.trim()"
-      class="flex w-full justify-between items-center"
+      class="flex w-full items-center justify-between"
     >
       <div class="text-xs">
         Character Count:
         <strong>{{ firstMessage?.content.length }}</strong>
       </div>
       <div class="space-x-2">
-        <button class="btn btn-neutral" @click="generate()">Regenerate</button>
-        <a class="btn btn-primary" :href="postURL" target="_blank">Post</a>
+        <button class="btn-neutral btn" @click="generate()">Regenerate</button>
+        <a class="btn-primary btn" :href="postURL" target="_blank">Post</a>
       </div>
     </div>
   </CardGeneric>

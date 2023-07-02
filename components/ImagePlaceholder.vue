@@ -3,16 +3,16 @@ defineProps<{
   loading: boolean
   gradient: {
     start: string
-    finish: string
+    end: string
   }
 }>()
 </script>
 <template>
   <div
-    class="aspect-video bg-gray-800 flex justify-center items-center text-lg"
-    :style="`background: linear-gradient(to right, ${gradient.start} , ${gradient.finish})`"
+    class="flex aspect-video items-center justify-center bg-gray-800 text-lg"
+    :style="`background: linear-gradient(to right, ${gradient.start} , ${gradient.end})`"
   >
     <AppLoading v-if="loading" />
-    <span class="text-white font-bold" v-else>Social Image Placeholder</span>
+    <span class="font-bold text-white" v-else>Social Image Placeholder</span>
   </div>
 </template>

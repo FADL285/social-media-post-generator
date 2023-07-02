@@ -1,50 +1,50 @@
 <script setup lang="ts">
-import type { AsyncState } from "~~/types";
-const props = defineProps<{
-  title?: string;
-  body?: string;
-  state?: AsyncState;
-}>();
+import type { AsyncState } from "~~/types"
+const { title, body, state } = defineProps<{
+  title?: string
+  body?: string
+  state?: AsyncState
+}>()
 
 defineEmits<{
-  (e: "update:body", payload: string): void;
-}>();
+  (e: "update:body", payload: string): void
+}>()
 
-const textarea = ref();
+const textarea = ref()
 
 watch(
-  () => props.body,
+  () => body,
   () => {
     nextTick(() => {
-      if (!textarea.value) return;
-      textarea.value.style.height = "";
-      textarea.value.style.height = textarea.value.scrollHeight + "px";
-    });
+      if (!textarea.value) return
+      textarea.value.style.height = ""
+      textarea.value.style.height = textarea.value.scrollHeight + "px"
+    })
   }
-);
+)
 
-const isError = computed(() => props.state === "error");
-const isLoading = computed(() => props.state === "loading");
+const isError = computed(() => state === "error")
+const isLoading = computed(() => state === "loading")
 </script>
 <template>
-  <div class="card bg-base-100 shadow-xl border-t-4 border-info">
+  <div class="card border-t-4 border-info bg-base-100 shadow-xl">
     <div class="card-body">
       <h2 class="card-title">
         <slot name="title">{{ title }}</slot>
         <AppLoading v-if="isLoading" />
-        <span v-if="isError" class="text-red-500 text-sm font-normal">
+        <span v-if="isError" class="text-sm font-normal text-red-500">
           Error generating announcement
         </span>
       </h2>
 
       <div>
-        <hr class="opacity-10 pb-5" />
+        <hr class="pb-5 opacity-10" />
         <div>
           <slot name="body">
             <textarea
               ref="textarea"
               v-if="body"
-              class="w-full bg-transparent font-sans text-lg resize-none mb-5 p-2"
+              class="mb-5 w-full resize-none bg-transparent p-2 font-sans text-lg"
               :value="body"
               @input="
                 $emit(

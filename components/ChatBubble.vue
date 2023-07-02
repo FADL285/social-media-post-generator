@@ -25,7 +25,7 @@ const relativeTime = useTimeAgo(() => props.message?.createdAt ?? new Date())
       <time v-if="message" class="text-xs opacity-50">{{ relativeTime }}</time>
     </div>
     <div
-      class="chat-bubble bg-white dark:bg-gray-900 max-w-max w-full prose prose-sm py-0"
+      class="chat-bubble prose prose-sm w-full max-w-max bg-white py-0 dark:bg-gray-900"
     >
       <Markdown v-if="message" :source="message.text" />
       <slot v-else />
@@ -36,9 +36,9 @@ const relativeTime = useTimeAgo(() => props.message?.createdAt ?? new Date())
 <style lang="postcss" scoped>
 :deep(code) {
   background: none;
-  @apply overflow-x-auto w-full;
+  @apply w-full overflow-x-auto;
 }
 :deep(pre) {
-  @apply dark:bg-[rgba(0,0,0,.3)] overflow-x-auto w-full;
+  @apply w-full overflow-x-auto dark:bg-[rgba(0,0,0,.3)];
 }
 </style>

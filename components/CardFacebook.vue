@@ -1,5 +1,5 @@
 <script setup lang="ts">
-const { url, temperature = 0.5 } = defineProps<{
+const { url, temperature = 1 } = defineProps<{
   url: string;
   temperature: number;
 }>()

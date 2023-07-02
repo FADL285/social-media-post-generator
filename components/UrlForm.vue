@@ -36,10 +36,10 @@ const handleSubmit = () => {
           type="url"
           placeholder="Full Article URL..."
           v-model="formURLModel"
-          class="input input-bordered sm:flex-1"
+          class="input-bordered input sm:flex-1"
           required
         />
-        <button class="btn uppercase hover">Generate Announcements</button>
+        <button class="hover btn uppercase">Generate Announcements</button>
       </div>
     </div>
     <TemperatureSelector v-model="formTemperatureModel" />
