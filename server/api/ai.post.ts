@@ -9,7 +9,7 @@ export default defineEventHandler(async (event) => {
   })
   const storageKey = session.id + ":messages"
 
-  const { message, agent, url, temperature = 0.2 } = await readBody(event)
+  const { message, agent, url, temperature = 1 } = await readBody(event)
 
   if (!Object.keys(agents).includes(`${agent}Agent`))
     throw new Error(`${agent} Agent does not exist`)

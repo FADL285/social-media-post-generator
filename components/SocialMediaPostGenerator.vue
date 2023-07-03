@@ -8,12 +8,22 @@ const form = ref<URLFormPayload>({
   temperature: 1
 })
 
+const validUrl = computed(() => {
+  try {
+    new URL(form.value.url)
+    return true
+  } catch {
+    return false
+  }
+})
+
 const twitterCard = ref<InstanceType<typeof CardTwitter> | null>(null)
 const facebookCard = ref<InstanceType<typeof CardFacebook> | null>(null)
 
 const { generate: generateImage } = useImageAi()
 const handleURLFromSubmit = (FormData: URLFormPayload) => {
   if (!FormData.url) return
+
   twitterCard.value?.generate()
   facebookCard.value?.generate()
   generateImage(form.value.url)
@@ -25,6 +35,7 @@ const handleURLFromSubmit = (FormData: URLFormPayload) => {
   <UrlForm
     v-model:url="form.url"
     v-model:temperature="form.temperature"
+    :valid-url="validUrl"
     @submit="handleURLFromSubmit"
   />
 

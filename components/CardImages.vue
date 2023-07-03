@@ -3,7 +3,15 @@ defineProps<{
   url: string
 }>()
 
+const activeRegenerateBtn = ref(false)
 const { image, state, title, generate } = useImageAi()
+
+// Set imageGeneratedFromUrl to true when image is generated for the first time and once
+watch(image, () => {
+  if (image.value && !activeRegenerateBtn.value) {
+    activeRegenerateBtn.value = true
+  }
+})
 
 const gradients = [
   {
@@ -34,7 +42,12 @@ const gradients = [
           class="mb-5 flex-grow md:mb-0 md:w-1/3"
         >
           <div v-if="image">
-            <ImageCanvas :bgImage="image" :title="title" :gradient="gradient" />
+            <ImageCanvas
+              :bgImage="image"
+              :title="title"
+              :loading="state === 'loading'"
+              :gradient="gradient"
+            />
             <span class="text-sm">(right click image to save)</span>
           </div>
 
@@ -47,7 +60,7 @@ const gradients = [
       </div>
     </template>
     <div v-if="url">
-      <button class="btn-primary btn">Regenerate</button>
+      <button class="btn-primary btn" @click="generate(url)">Regenerate</button>
     </div>
   </CardGeneric>
 </template>

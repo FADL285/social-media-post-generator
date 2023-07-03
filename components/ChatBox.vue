@@ -104,7 +104,7 @@ const textMessage = ref("")
             :isMine="me.id === message.userId"
           />
           <ChatBubble v-for="user in usersTyping" :user="user">
-            <AppLoading />
+            <AppLoading class="loading-sm" />
           </ChatBubble>
         </div>
       </div>

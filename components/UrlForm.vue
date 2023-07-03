@@ -1,18 +1,12 @@
 <script setup lang="ts">
 import type { URLFormPayload } from "~~/types"
 
+const { validUrl } = defineProps<{
+  validUrl: boolean
+}>()
 const formURLModel = defineModel<string>("url", { required: true })
 const formTemperatureModel = defineModel<number>("temperature", {
   default: 0.5
-})
-
-const validUrl = computed(() => {
-  try {
-    new URL(formURLModel.value)
-    return true
-  } catch {
-    return false
-  }
 })
 
 const emit = defineEmits<{
@@ -20,7 +14,7 @@ const emit = defineEmits<{
 }>()
 
 const handleSubmit = () => {
-  if (validUrl.value)
+  if (validUrl)
     emit("submit", {
       url: formURLModel.value,
       temperature: formTemperatureModel.value
