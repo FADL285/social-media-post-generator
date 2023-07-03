@@ -49,7 +49,7 @@ watch(
       />
       <div
         v-if="title"
-        class="mockup-window mx-8 flex min-h-[75%] w-3/4 flex-col border bg-base-100 text-lg"
+        class="mockup-window left-[6%] mx-8 flex min-h-[85%] w-3/4 flex-col border bg-base-100 text-lg"
       >
         <div class="flex flex-1 flex-col bg-base-200 px-6 pb-6 pt-1">
           <p class="flex items-center justify-center">{{ title }}</p>
