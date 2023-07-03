@@ -1,7 +1,7 @@
 <script setup lang="ts">
 const { url, temperature = 1 } = defineProps<{
-  url: string;
-  temperature: number;
+  url: string
+  temperature: number
 }>()
 const { chat, state, firstMessage } = useChatAi({ agent: "facebook" })
 
@@ -14,6 +14,7 @@ const postURL = computed(
   () =>
     `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(url)}`
 )
+const stateIsError = computed(() => state.value === "error")
 
 /**
  * We cannot pass the text to the facebook post
@@ -34,9 +35,12 @@ function post() {
     :body="firstMessage?.content?.trim()"
     @update:body="firstMessage ? (firstMessage.content = $event) : null"
   >
-    <div v-if="firstMessage?.content?.trim()" class="space-x-2">
-      <button class="btn btn-neutral" @click="generate()">Regenerate</button>
-      <a :href="postURL" class="btn btn-primary" @click.prevent="post()">
+    <div
+      v-if="firstMessage?.content?.trim() || stateIsError"
+      class="space-x-2"
+    >
+      <button class="btn-neutral btn" @click="generate()">Regenerate</button>
+      <a v-if="!stateIsError" :href="postURL" class="btn-primary btn" @click.prevent="post()">
         Copy Text and Open Facebook
       </a>
     </div>

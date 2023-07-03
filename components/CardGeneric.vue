@@ -1,9 +1,15 @@
 <script setup lang="ts">
 import type { AsyncState } from "~~/types"
-const { title, body, state } = defineProps<{
+const {
+  title,
+  body,
+  state,
+  errorMessage = "Error generating announcement"
+} = defineProps<{
   title?: string
   body?: string
   state?: AsyncState
+  errorMessage?: string
 }>()
 
 defineEmits<{
@@ -29,11 +35,11 @@ const isLoading = computed(() => state === "loading")
 <template>
   <div class="card border-t-4 border-info bg-base-100 shadow-xl">
     <div class="card-body">
-      <h2 class="card-title">
+      <h2 class="card-title items-baseline gap-4">
         <slot name="title">{{ title }}</slot>
         <AppLoading v-if="isLoading" />
         <span v-if="isError" class="text-sm font-normal text-red-500">
-          Error generating announcement
+          {{ errorMessage }}
         </span>
       </h2>
 

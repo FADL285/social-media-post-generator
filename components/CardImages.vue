@@ -34,7 +34,7 @@ const gradients = [
 </script>
 
 <template>
-  <CardGeneric title="Images" :state="state">
+  <CardGeneric title="Images" :state="state" :error-message="'Unable to generate images'">
     <template #body>
       <div class="flex-wrap gap-2 md:flex">
         <div

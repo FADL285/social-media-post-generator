@@ -2,23 +2,25 @@
 import type { URLFormPayload } from "~~/types"
 
 const { validUrl } = defineProps<{
-  validUrl: boolean
+  validUrl: boolean,
+  isFormSubmitted: boolean
 }>()
 const formURLModel = defineModel<string>("url", { required: true })
 const formTemperatureModel = defineModel<number>("temperature", {
   default: 0.5
 })
-
 const emit = defineEmits<{
   submit: [payload: URLFormPayload]
 }>()
 
+
 const handleSubmit = () => {
-  if (validUrl)
+  if (validUrl) {
     emit("submit", {
       url: formURLModel.value,
       temperature: formTemperatureModel.value
     })
+  }
 }
 </script>
 
@@ -33,7 +35,9 @@ const handleSubmit = () => {
           class="input-bordered input sm:flex-1"
           required
         />
-        <button class="hover btn uppercase">Generate Announcements</button>
+        <button :disabled="isFormSubmitted" class="hover btn min-w-[17rem] uppercase">
+          Generate Announcements <AppLoading v-if="isFormSubmitted" />
+        </button>
       </div>
     </div>
     <TemperatureSelector v-model="formTemperatureModel" />

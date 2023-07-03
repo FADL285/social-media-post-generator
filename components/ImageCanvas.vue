@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { toJpeg } from "html-to-image"
 
-const { bgImage, title, gradient } = defineProps<{
+const { bgImage } = defineProps<{
   bgImage: string
   title: string
   loading: boolean
@@ -14,7 +14,7 @@ const { bgImage, title, gradient } = defineProps<{
 const src = ref("")
 const image = ref()
 
-onMounted(async () => {
+const generateImage = async () => {
   const dataUrl = await toJpeg(image.value, {
     cacheBust: true,
     style: {
@@ -23,7 +23,16 @@ onMounted(async () => {
     }
   })
   src.value = dataUrl
-})
+}
+
+onMounted(() => generateImage())
+
+watch(
+  () => bgImage,
+  () => {
+    nextTick(() => generateImage())
+  }
+)
 </script>
 <template>
   <div class="relative">
@@ -36,11 +45,15 @@ onMounted(async () => {
       <img
         :src="bgImage"
         :alt="title"
-        class="absolute bottom-0 left-0 top-0 h-full w-[40%] object-cover mix-blend-soft-light"
+        class="absolute bottom-0 left-0 top-0 h-full object-cover mix-blend-soft-light"
+        :class="[title ? 'w-1/2' : 'w-full']"
       />
-      <div class="mockup-window mx-8 border bg-base-100">
-        <div class="flex justify-center bg-base-200 p-6">
-          <p>{{ title }}</p>
+      <div
+        v-if="title"
+        class="mockup-window mx-8 flex min-h-[75%] w-3/4 flex-col border bg-base-100 text-lg"
+      >
+        <div class="flex flex-1 flex-col bg-base-200 px-6 pb-6 pt-1">
+          <p class="flex items-center justify-center">{{ title }}</p>
         </div>
       </div>
     </div>
@@ -54,7 +67,7 @@ onMounted(async () => {
 
 <style scoped>
 .mockup-window::before {
-    opacity: 0.75;
-    box-shadow: 1.4em 0 red, 2.8em 0 orange, 4.2em 0 green;
+  opacity: 0.75;
+  box-shadow: 1.4em 0 red, 2.8em 0 orange, 4.2em 0 green;
 }
 </style>

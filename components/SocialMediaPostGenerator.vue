@@ -7,6 +7,7 @@ const form = ref<URLFormPayload>({
   url: "",
   temperature: 1
 })
+const isFormSubmitted = ref(false)
 
 const validUrl = computed(() => {
   try {
@@ -21,12 +22,16 @@ const twitterCard = ref<InstanceType<typeof CardTwitter> | null>(null)
 const facebookCard = ref<InstanceType<typeof CardFacebook> | null>(null)
 
 const { generate: generateImage } = useImageAi()
-const handleURLFromSubmit = (FormData: URLFormPayload) => {
-  if (!FormData.url) return
 
-  twitterCard.value?.generate()
-  facebookCard.value?.generate()
-  generateImage(form.value.url)
+const handleURLFromSubmit = async (FormData: URLFormPayload) => {
+  if (!FormData.url) return
+  isFormSubmitted.value = true
+  await Promise.all([
+    twitterCard.value?.generate(),
+    facebookCard.value?.generate(),
+    generateImage(FormData.url)
+  ])
+  isFormSubmitted.value = false
 }
 </script>
 
@@ -36,6 +41,7 @@ const handleURLFromSubmit = (FormData: URLFormPayload) => {
     v-model:url="form.url"
     v-model:temperature="form.temperature"
     :valid-url="validUrl"
+    :is-form-submitted="isFormSubmitted"
     @submit="handleURLFromSubmit"
   />
 

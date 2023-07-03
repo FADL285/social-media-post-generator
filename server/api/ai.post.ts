@@ -12,41 +12,59 @@ export default defineEventHandler(async (event) => {
   const { message, agent, url, temperature = 1 } = await readBody(event)
 
   if (!Object.keys(agents).includes(`${agent}Agent`))
-    throw new Error(`${agent} Agent does not exist`)
+    throw createError({ statusCode: 400, message: "Invalid agent" })
 
   if (agent !== agents.AgentTypes.CustomerSupport) {
+    try {
+      const { data } = await openai.createChatCompletion({
+        model: "gpt-3.5-turbo",
+        messages: [],
+        temperature,
+        // @ts-expect-error checking above if agent exists
+        ...agents[`${agent}Agent`]({ url })
+      })
+
+      return data
+    } catch (error: any) {
+      throw createError({
+        statusCode: error?.response ? error.response.status : 400,
+        message: error?.response
+          ? error.response.data.error.code
+          : "Unable to generate content for the provided URL"
+      })
+    }
+  }
+
+  try {
+    const messages: ChatCompletionRequestMessage[] =
+      (await storage.getItem(storageKey)) || []
+
+    messages.push({
+      role: "user",
+      content: message
+    })
+
     const { data } = await openai.createChatCompletion({
       model: "gpt-3.5-turbo",
       messages: [],
       temperature,
-      // @ts-expect-error checking above if agent exists
-      ...agents[`${agent}Agent`]({ url })
+      ...agents.customerSupportAgent({ messages })
+    })
+    const reply = data.choices[0].message
+    messages.push({
+      role: "assistant",
+      content: reply?.content as string
     })
 
+    await storage.setItem(storageKey, messages)
+
     return data
+  } catch (error: any) {
+    throw createError({
+      statusCode: error?.response ? error.response.status : 400,
+      message: error?.response
+        ? error.response.data.error.code
+        : "Unable to generate content for the provided URL"
+    })
   }
-
-  const messages: ChatCompletionRequestMessage[] =
-    (await storage.getItem(storageKey)) || []
-
-  messages.push({
-    role: "user",
-    content: message
-  })
-
-  const { data } = await openai.createChatCompletion({
-    model: "gpt-3.5-turbo",
-    messages: [],
-    temperature,
-    ...agents.customerSupportAgent({ messages })
-  })
-  const reply = data.choices[0].message
-  messages.push({
-    role: "assistant",
-    content: reply?.content as string
-  })
-
-  await storage.setItem(storageKey, messages)
-
-  return data
 })

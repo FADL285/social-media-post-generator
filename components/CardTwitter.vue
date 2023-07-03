@@ -13,6 +13,7 @@ const postURL = computed(
       firstMessage.value?.content || ""
     )}`
 )
+const stateIsError = computed(() => state.value === "error")
 </script>
 <template>
   <CardGeneric
@@ -22,16 +23,16 @@ const postURL = computed(
     @update:body="firstMessage ? (firstMessage.content = $event) : null"
   >
     <div
-      v-if="firstMessage?.content?.trim()"
+      v-if="firstMessage?.content?.trim() || stateIsError"
       class="flex w-full items-center justify-between"
     >
       <div class="text-xs">
         Character Count:
-        <strong>{{ firstMessage?.content.length }}</strong>
+        <strong>{{ firstMessage?.content?.length || 0 }}</strong>
       </div>
       <div class="space-x-2">
         <button class="btn-neutral btn" @click="generate()">Regenerate</button>
-        <a class="btn-primary btn" :href="postURL" target="_blank">Post</a>
+        <a v-if="!stateIsError" class="btn-primary btn" :href="postURL" target="_blank">Post</a>
       </div>
     </div>
   </CardGeneric>

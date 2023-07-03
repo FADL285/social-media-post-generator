@@ -6,6 +6,8 @@ export const useImageAi = () => {
   const state = useState<AsyncState>("social-image-state", () => null)
 
   async function generate(url: string) {
+    title.value = ""
+    image.value = ""
     state.value = "loading"
     try {
       const res = await Promise.all([
