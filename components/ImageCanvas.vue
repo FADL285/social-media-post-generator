@@ -15,14 +15,13 @@ const src = ref("")
 const image = ref()
 
 const generateImage = async () => {
-  const dataUrl = await toJpeg(image.value, {
+  src.value = await toJpeg(image.value, {
     cacheBust: true,
     style: {
       opacity: "1",
       position: "relative"
     }
   })
-  src.value = dataUrl
 }
 
 onMounted(() => generateImage())

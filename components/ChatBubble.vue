@@ -25,7 +25,7 @@ const relativeTime = useTimeAgo(() => props.message?.createdAt ?? new Date())
       <time v-if="message" class="text-xs opacity-50">{{ relativeTime }}</time>
     </div>
     <div
-      class="chat-bubble prose prose-sm w-full max-w-max bg-white py-0 dark:bg-gray-900"
+      class="chat-bubble prose prose-sm flex w-full max-w-max bg-white py-0 dark:bg-gray-900"
     >
       <Markdown v-if="message" :source="message.text" />
       <slot v-else />
