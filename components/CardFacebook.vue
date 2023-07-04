@@ -35,12 +35,14 @@ function post() {
     :body="firstMessage?.content?.trim()"
     @update:body="firstMessage ? (firstMessage.content = $event) : null"
   >
-    <div
-      v-if="firstMessage?.content?.trim() || stateIsError"
-      class="space-x-2"
-    >
+    <div v-if="firstMessage?.content?.trim() || stateIsError" class="space-x-2">
       <button class="btn-neutral btn" @click="generate()">Regenerate</button>
-      <a v-if="!stateIsError" :href="postURL" class="btn-primary btn" @click.prevent="post()">
+      <a
+        v-if="!stateIsError"
+        :href="postURL"
+        class="btn-primary btn"
+        @click.prevent="post()"
+      >
         Copy Text and Open Facebook
       </a>
     </div>
