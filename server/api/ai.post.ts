@@ -38,8 +38,8 @@ const handleErrorResponse = (error: any) => {
   const stackTrace = error.stack || "No stack trace"
 
   console.log("####################### >>> ERROR <<< #######################")
-  console.error(`Error: ${message}`)
-  console.error(`Stack trace: ${stackTrace}`)
+  console.error(`^_^ Error Message :( ^_^ \n ${message}`)
+  console.error(`^_^ Stack Trace :( ^_^ \n  ${stackTrace}`)
   console.log("####################### <<< ERROR >>> #######################")
 
   throw createError({ statusCode, message })

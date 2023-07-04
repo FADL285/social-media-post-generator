@@ -47,6 +47,7 @@ const textMessage = ref("")
   <div class="mx-c-full fixed bottom-[10px] right-[10px]">
     <button
       class="rounded bg-blue-500 p-3"
+      data-test="chat-widget-button"
       v-show="!isOpen"
       @click="isOpen = true"
     >
@@ -56,12 +57,13 @@ const textMessage = ref("")
     <div
       v-if="isOpen"
       class="box w-[450px] max-w-full rounded bg-gray-300 dark:bg-gray-800"
+      data-test="chat-widget-box"
     >
       <header
         class="flex items-center justify-between bg-gray-200 px-4 dark:bg-gray-900"
       >
         <h2>Customer Support Chat</h2>
-        <button class="p-4 pr-0" @click="isOpen = false">
+        <button data-test="chat-widget-close-button" class="p-4 pr-0" @click="isOpen = false">
           <!-- arrow down svg -->
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -85,7 +87,7 @@ const textMessage = ref("")
           v-if="!messages.length"
           class="m-auto w-[350px] max-w-full text-center"
         >
-          <strong class="text-lg">Chat with Botman!</strong>
+          <strong class="text-lg">Chat with BotMan!</strong>
           <p>Our A.I. powered assistant</p>
           <strong class="mt-10 block">Go ahead and ask us something:</strong>
           <ul class="list-inside list-disc text-left">
@@ -97,6 +99,7 @@ const textMessage = ref("")
         </div>
         <div>
           <ChatBubble
+            data-test="chat-bubble"
             v-for="message in messages"
             :key="message.id"
             :user="getUser(message.userId)"
@@ -113,6 +116,7 @@ const textMessage = ref("")
           {{ usersTypingText }}
         </div>
         <input
+          data-test="chat-widget-input"
           type="text"
           placeholder="Type your message"
           class="input w-full"

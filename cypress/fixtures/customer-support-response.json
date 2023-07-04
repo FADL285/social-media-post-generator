@@ -1,0 +1,21 @@
+{
+  "id": "chatcmpl-7Ya0SaApau7UOYCiY5uYBCeJRldL1",
+  "object": "chat.completion",
+  "created": 1688475916,
+  "model": "gpt-3.5-turbo-0613",
+  "choices": [
+    {
+      "index": 0,
+      "message": {
+        "role": "assistant",
+        "content": "Hello! How can I assist you today with the 'Social Media Post Generator' application?"
+      },
+      "finish_reason": "stop"
+    }
+  ],
+  "usage": {
+    "prompt_tokens": 379,
+    "completion_tokens": 18,
+    "total_tokens": 397
+  }
+}

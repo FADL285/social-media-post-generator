@@ -25,10 +25,12 @@ const relativeTime = useTimeAgo(() => props.message?.createdAt ?? new Date())
       <time v-if="message" class="text-xs opacity-50">{{ relativeTime }}</time>
     </div>
     <div
+      data-test="chat-bubble-message"
       class="chat-bubble prose prose-sm flex w-full max-w-max bg-white py-0 dark:bg-gray-900"
     >
-      <Markdown v-if="message" :source="message.text" />
-      <slot v-else />
+      <slot>
+        <Markdown :source="message?.text" />
+      </slot>
     </div>
   </div>
 </template>
