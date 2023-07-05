@@ -1,8 +1,13 @@
+<script setup lang="ts">
+const route = useRoute()
+const inExtensionMode = useChromeExtension().isEnabled
+</script>
+
 <template>
   <div class="container m-auto max-w-5xl px-4 md:px-6">
     <NuxtErrorBoundary>
-      <SocialMediaPostGenerator />
-      <ChatWidget />
+      <SocialMediaPostGenerator :in-extension-mode="inExtensionMode" />
+      <ChatWidget v-if="!inExtensionMode" />
       <template #error="{ error, clearError }">
         <div>
           <p class="pt-10 text-4xl">⚠️ A fatal error has occurred:</p>

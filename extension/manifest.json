@@ -1,0 +1,15 @@
+{
+  "manifest_version": 3,
+  "name": "AI Social Media Post Generator",
+  "description": "This extension will generate social media posts for you using AI to publish them on facebook, or twitter.",
+  "version": "1.0",
+  "permissions": ["activeTab"],
+  "icons": {
+    "128": "images/icon128.png",
+    "48": "images/icon48.png",
+    "16": "images/icon16.png"
+  },
+  "action": {
+    "default_popup": "popup.html"
+  }
+}
