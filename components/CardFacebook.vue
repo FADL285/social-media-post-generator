@@ -35,7 +35,10 @@ function post() {
     :body="firstMessage?.content?.trim()"
     @update:body="firstMessage ? (firstMessage.content = $event) : null"
   >
-    <div v-if="firstMessage?.content?.trim() || stateIsError" class="space-x-2">
+    <div
+      v-if="firstMessage?.content?.trim() || stateIsError"
+      class="flex flex-wrap gap-2"
+    >
       <button class="btn-neutral btn" @click="generate()">Regenerate</button>
       <a
         v-if="!stateIsError"

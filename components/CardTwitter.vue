@@ -24,15 +24,21 @@ const stateIsError = computed(() => state.value === "error")
   >
     <div
       v-if="firstMessage?.content?.trim() || stateIsError"
-      class="flex w-full items-center justify-between"
+      class="flex w-full flex-wrap items-center justify-between"
     >
       <div class="text-xs">
         Character Count:
         <strong>{{ firstMessage?.content?.length || 0 }}</strong>
       </div>
-      <div class="space-x-2">
+      <div class="flex flex-wrap gap-2">
         <button class="btn-neutral btn" @click="generate()">Regenerate</button>
-        <a v-if="!stateIsError" class="btn-primary btn" :href="postURL" target="_blank">Post</a>
+        <a
+          v-if="!stateIsError"
+          class="btn-primary btn"
+          :href="postURL"
+          target="_blank"
+          >Post</a
+        >
       </div>
     </div>
   </CardGeneric>
