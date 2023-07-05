@@ -13,7 +13,7 @@ Additionally, we have implemented a customer support bot to assist you and gener
 
 ## Application Preview
 
-![App Preview](readme-docs/preview.webp)
+![App Preview](readme-files/preview.webp)
 
 ## Google Chrome Extension
 
