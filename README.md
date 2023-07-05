@@ -13,6 +13,8 @@ Additionally, we have implemented a customer support bot to assist you and gener
 
 ## Application Preview
 
+[App Preview Video](https://github.com/FADL285/social-media-post-generator/assets/53804570/0c9deeb3-a168-4e2e-8f66-1da7f1d5db1c)
+
 ![App Preview](readme-files/preview.webp)
 
 ## Google Chrome Extension
@@ -20,7 +22,8 @@ Additionally, we have implemented a customer support bot to assist you and gener
 A Chrome extension for this application is also available for use. It can be found in the 'extension' folder of this project.
 
 Chrome Extension Preview:
-![Google Chrome Extension Preview](readme-docs/extension.webm)
+
+[Extension Preview Video](https://github.com/FADL285/social-media-post-generator/assets/53804570/a1e870f8-5db0-43ff-9bcf-8cc6f0e80ec3)
 
 ## Setup and Installation
 
