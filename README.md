@@ -1,44 +1,59 @@
-# Social Media Post Generator App powered by chatGPT
+# Social Media Post Generator
 
-AI App powered by OpenAI ChatGPT, This app takes an article URL and makes an announcement post for social media.
+Social Media Post Generator is a cutting-edge application built with the power of Nuxt3 and the OpenAI chatGPT API. This application takes any article link and generates engaging social media posts for Twitter and Facebook, effectively encapsulating the essence of the article for your audience. It also creates an image relevant to the article's context and title, enhancing the visual appeal of your social media posts.
 
-Look at the [Nuxt 3 documentation](https://nuxt.com/docs/getting-started/introduction) to learn more.
+Additionally, we have implemented a customer support bot to assist you and generate what you need within the app's context.
 
-## Setup
+## Technologies Used
 
-Make sure to install the dependencies:
+* Nuxt3
+* Tailwind CSS
+* OpenAI chatGPT API
+* Cypress (for end-to-end testing)
 
-```bash
-# yarn
-yarn install
+## Application Preview
 
-# npm
-npm install
+![App Preview](readme-docs/preview.webp)
 
-# pnpm
-pnpm install
-```
+## Google Chrome Extension
 
-## Development Server
+A Chrome extension for this application is also available for use. It can be found in the 'extension' folder of this project.
 
-Start the development server on http://localhost:3000
+Chrome Extension Preview:
+![Google Chrome Extension Preview](readme-docs/extension.webm)
 
-```bash
-npm run dev
-```
+## Setup and Installation
 
-## Production
+To get the application up and running, you'll need an API key from OpenAI. Get it [here](https://platform.openai.com/account/api-keys).
 
-Build the application for production:
+### Step-by-step guide
 
-```bash
-npm run build
-```
+1. Clone the repository to your local machine using `git clone`.
+2. Navigate to the project's root directory and install the necessary dependencies by running `npm install`.
+3. In the root directory, create a new file named `.env` and add your OpenAI API Key like so:
 
-Locally preview production build:
+    ```dosini
+      OPENAI_API_KEY=your_openai_api_key
+    ```
 
-```bash
-npm run preview
-```
+4. You're all set! Now you can run the application using various commands (described below).
 
-Check out the [deployment documentation](https://nuxt.com/docs/getting-started/deployment) for more information.
+## Available Commands
+
+* `npm install`: This command installs all the required dependencies to run the application.
+* `npm run dev`: Runs the application in development mode. Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+* `npm run build`: This command builds the application for production to the `build` folder.
+* `npm run preview`: After building the application using `npm run build`, you can preview the production app using this command.
+* `npm run cypress:open`: Opens the Cypress end-to-end testing tool.
+
+## Contributing
+
+We appreciate your contributions! Please feel free to submit a pull request if you have something to add.
+
+## License
+
+This project is licensed under the MIT License.
+
+## Contact Us
+
+If you have any questions or suggestions, please feel free to reach out to us at [@FADL285](https://plu.us/fadl)
