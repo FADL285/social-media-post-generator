@@ -36,7 +36,7 @@ To get the application up and running, you'll need an API key from OpenAI. Get i
 3. In the root directory, create a new file named `.env` and add your OpenAI API Key like so:
 
     ```dosini
-      OPENAI_API_KEY=your_openai_api_key
+      NUXT_OPENAI_API_KEY=your_openai_api_key
     ```
 
 4. You're all set! Now you can run the application using various commands (described below).
